@@ -9,7 +9,6 @@ using buggybuddy.Models.ViewModels;
 using buggybuddy.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using web.buggybuddy.core.Models;
 using web.buggybuddy.core.Models.ViewModels;
 
 namespace buggybuddy.Controllers
