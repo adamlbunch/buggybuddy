@@ -1,22 +1,19 @@
-﻿@model web.buggybuddy.core.Models.ViewModels.ProfileViewModel
+﻿@model buggybuddy.Models.ViewModels.ProfileViewModel
 @{
-	ViewData["Title"] = "EditProfile";
+    ViewData["Title"] = "EditProfile";
 }
-
 <h2>EditProfile</h2>
-
 <form asp-action="Login" id="login">
-	<div class="form-group">
-		<input id="first-name" asp-for="FirstName" class="form-control" placeholder="Change First Name" autocomplete="organization" autofocus="autofocus" />
-		<span id="login-username-danger" asp-validation-for="FirstName" class="text-danger"></span>
-	</div>
-	<div class="form-group">
-		<input id="login-password" asp-for="LastName" class="form-control" placeholder="Password" />
-		<span id="login-password-danger" asp-validation-for="LastName" class="text-danger"></span>
-	</div>
-	<div class="form-group">
-		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-		<input id="login-btn" type="submit" value="LOG IN" />
-	</div>
+    <div class="form-group">
+        <input id="first-name" asp-for="FirstName" class="form-control" placeholder="Change First Name" autocomplete="organization" autofocus="autofocus" />
+        <span id="login-username-danger" asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input id="login-password" asp-for="LastName" class="form-control" placeholder="Password" />
+        <span id="login-password-danger" asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input id="login-btn" type="submit" value="LOG IN" />
+    </div>
 </form>
-

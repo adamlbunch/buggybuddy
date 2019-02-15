@@ -1,15 +1,13 @@
-﻿@model web.buggybuddy.core.Models.ViewModels.ProfileViewModel
+﻿@model buggybuddy.Models.ViewModels.ProfileViewModel
 @{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
-
 @using (Html.BeginForm("Logout", "Home"))
 {
-	<div>
-		<button id="logout-arrow" type="submit"><i id="logout-arrow-hover" class="fas fa-sign-out-alt fa-3x"></i></button>
-	</div>
+    <div>
+        <button id="logout-arrow" type="submit"><i id="logout-arrow-hover" class="fas fa-sign-out-alt fa-3x"></i></button>
+    </div>
 }
-
 <div class="profile-cards">
     <button id="view-matches-btn"><i class="fas fa-users"></i></button>
     <div id="profile-pic" class="profile-pic">
@@ -26,19 +24,17 @@
         </div>
     </form>
 </div>
-
 <div id="matches-overlay">
-	<button id="close-matches-btn"><i class="fas fa-times-circle"></i></button>
-	<div id="matches">
-		@foreach (var match in Model.Matches)
-		{
-			<div id="matches-container">
-				<!--<p id="match-username">@match.UserName</p><li>-->
-				<img id="match-pic" src="@match.ProfilePicture"/>
-			</div>
-		}
-	</div>
+    <button id="close-matches-btn"><i class="fas fa-times-circle"></i></button>
+    <div id="matches">
+        @foreach (var match in Model.Matches)
+        {
+            <div id="matches-container">
+                <!--<p id="match-username">@match.UserName</p><li>-->
+                <img id="match-pic" src="@match.ProfilePicture" />
+            </div>
+        }
+    </div>
 </div>
-
 <script src="../js/profile.js"></script>
 <script src="../js/fontawesome-all.js"></script>

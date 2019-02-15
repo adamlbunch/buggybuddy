@@ -1,49 +1,41 @@
 ﻿@model buggybuddy.Models.ViewModels.SearchViewModel
 @{
-	ViewData["Title"] = "Search";
+    ViewData["Title"] = "Search";
 }
-
 @using (Html.BeginForm("BackToProfile", "Home"))
 {
-	<div>
-		<button id="back-arrow" type="submit"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
-	</div>
+    <div>
+        <button id="back-arrow" type="submit"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
+    </div>
 }
 <div id="wrapper">
-	<!--<img id="search-trash" src="../images/trash.png">-->
-	<div id="profile-cards" class="profile-cards">
-		<img id="search-buggy" src="../images/basket_blue.png">
-		<div id="profile-pic" class="profile-pic">
-			<div id="pic-overlay" class="pic-overlay"></div>
-			<img class="profile-img" src="@Model.ProspectPicture">
-			<img id="like-img" src="../images/like.png">
-			<img id="nope-img" src="../images/nope.png">
-		</div>
-
-		<h1 id="profile-name" class="profile-name">@Model.ProspectUserName</h1>
-		<!--<p class="profile-title">@Model.ProspectUserName</p>-->
-		<div id="profile-info" class="profile-info"></div>
-		<p id="profile-description" class="profile-description">@Model.ProspectInfo</p>
-		<form asp-action="Match" id="match">
-		</form>
-		<button id="search-btn-yes"><i class="far fa-heart fa-2x"></i></button>
-		<form asp-action="Deny" id="deny">
-		</form>
-		<button id="search-btn-no"><i class="far fa-times-circle fa-2x"></i></button>
-	</div>
+    <!--<img id="search-trash" src="../images/trash.png">-->
+    <div id="profile-cards" class="profile-cards">
+        <img id="search-buggy" src="../images/basket_blue.png">
+        <div id="profile-pic" class="profile-pic">
+            <div id="pic-overlay" class="pic-overlay"></div>
+            <img class="profile-img" src="@Model.ProspectPicture">
+            <img id="like-img" src="../images/like.png">
+            <img id="nope-img" src="../images/nope.png">
+        </div>
+        <h1 id="profile-name" class="profile-name">@</h1>
+        <!--<p class="profile-title">@Model.ProspectUserName</p>-->
+        <div id="profile-info" class="profile-info"></div>
+        <p id="profile-description" class="profile-description">@Model.ProspectInfo</p>
+        <form asp-action="Match" id="match"></form>
+        <button id="search-btn-yes"><i class="far fa-heart fa-2x"></i></button>
+        <form asp-action="Deny" id="deny"></form>
+        <button id="search-btn-no"><i class="far fa-times-circle fa-2x"></i></button>
+    </div>
 </div>
 
-
-<script src="../js/search.js"> </script>
-
+<script src="../js/search.js"></script>
 <!--This piece of the script will only work when it is repeated here???-->
 <script>
 
-	setTimeout(function(){ 
-		document.getElementById("back-arrow").style.opacity = "1";
-	}, 500);
+    setTimeout(function () {
+        document.getElementById("back-arrow").style.opacity = "1";
+    }, 500);
 
 </script>
-
 <script src="../js/fontawesome-all.js"></script>
-

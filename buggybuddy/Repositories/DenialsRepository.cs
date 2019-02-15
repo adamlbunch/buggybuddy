@@ -16,16 +16,16 @@ namespace buggybuddy.Repositories
 			_configuration = configuration;
 		}
 
-		private IDbConnection connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
+		private IDbConnection Connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
 
 		public void AddDenial(string user, string prospect)
 		{
 			var sQuery = @"INSERT INTO [dbo].[Denials]([User], [Prospect], [LastChecked]) VALUES 
 						(@User, @Prospect, @LastChecked)";
 
-			using (connection)
+			using (Connection)
 			{
-				connection.Execute(sQuery, new
+				Connection.Execute(sQuery, new
 				{
 					User = user,
 					Prospect = prospect,

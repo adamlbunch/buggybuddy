@@ -47,12 +47,5 @@ namespace buggybuddy.Models.ViewModels
 		[DataType(DataType.Password)]
 		[Required]
 		public string RegisterPassword { get; set; }
-
-		/*[Display(Name = "Confirm Password")]
-		[StringLength(16, MinimumLength = 4)]
-		[DataType(DataType.Password)]
-		[Compare(nameof(RegisterPassword))]
-		[Required]
-		public string RegisterConfirmPassword { get; set; }*/
 	}
 }

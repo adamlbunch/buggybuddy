@@ -1,5 +1,4 @@
 ﻿using buggybuddy.Models.ViewModels;
-using web.buggybuddy.core.Models.ViewModels;
 
 namespace buggybuddy.Repositories
 {

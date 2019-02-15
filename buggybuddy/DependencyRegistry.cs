@@ -1,12 +1,8 @@
-﻿using StructureMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using buggybuddy.Logic;
+﻿using buggybuddy.Logic;
 using buggybuddy.Repositories;
+using StructureMap;
 
-namespace web.buggybuddy.core
+namespace buggybuddy
 {
     public class DependencyRegistry : Registry
     {

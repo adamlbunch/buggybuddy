@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using buggybuddy.Models.Dbos;
-using web.buggybuddy.core.Models.ViewModels;
+using buggybuddy.Models.ViewModels;
 
 namespace buggybuddy.Repositories
 {
@@ -8,7 +8,7 @@ namespace buggybuddy.Repositories
     {
 		DataResponse<Match> CheckForMatch(ProfileViewModel profile);
 		void AddMatch(string user, string prospect);
-		List<Match> GetMatches(ProfileViewModel user);
+		IEnumerable<Match> GetMatches(ProfileViewModel user);
 
 	}
 }

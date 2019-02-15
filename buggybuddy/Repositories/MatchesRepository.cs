@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using buggybuddy.Models.Dbos;
+using buggybuddy.Models.ViewModels;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using web.buggybuddy.core.Models.ViewModels;
 
 namespace buggybuddy.Repositories
 {
@@ -18,7 +18,7 @@ namespace buggybuddy.Repositories
 			_configuration = configuration;
 		}
 
-		private IDbConnection connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
+		private IDbConnection Connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
 
 		public DataResponse<Match> CheckForMatch(ProfileViewModel profile)
 		{
@@ -26,9 +26,9 @@ namespace buggybuddy.Repositories
 						WHERE [User] = @Prospect and [Prospect] = @User";
 
 			var entries = new List<Match>();
-			using (connection)
+			using (Connection)
 			{
-				entries = connection.Query<Match>(sQuery, new
+				entries = Connection.Query<Match>(sQuery, new
 				{
 					Prospect = profile.LastViewedProspect,
 					User = profile.UserName
@@ -57,9 +57,9 @@ namespace buggybuddy.Repositories
 			var sQuery = @"INSERT INTO [dbo].[Matches]([User], [Prospect]) VALUES 
 						(@User, @Prospect)";
 
-			using (connection)
+			using (Connection)
 			{
-				connection.Execute(sQuery, new
+				Connection.Execute(sQuery, new
 				{
 					User = user,
 					Prospect = prospect
@@ -67,15 +67,15 @@ namespace buggybuddy.Repositories
 			}
 		}
 
-		public List<Match> GetMatches(ProfileViewModel user)
+		public IEnumerable<Match> GetMatches(ProfileViewModel user)
 		{
 			var sQuery = @"SELECT * FROM [dbo].[Matches]
 						 WHERE [User] = @User";
 
 			var userInUsers = new List<Match>();
-			using (connection)
+			using (Connection)
 			{
-				userInUsers = connection.Query<Match>(sQuery, new
+				userInUsers = Connection.Query<Match>(sQuery, new
 				{
 					User = user.UserName
 				}).ToList();
@@ -85,9 +85,9 @@ namespace buggybuddy.Repositories
 					 WHERE [Prospect] = @User";
 
 			var userInProspects = new List<Match>();
-			using (connection)
+			using (Connection)
 			{
-				userInProspects = connection.Query<Match>(sQuery, new
+				userInProspects = Connection.Query<Match>(sQuery, new
 				{
 					User = user.UserName
 				}).ToList();
