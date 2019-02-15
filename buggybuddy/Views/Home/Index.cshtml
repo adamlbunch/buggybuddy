@@ -1,123 +1,92 @@
 ﻿@model buggybuddy.Models.ViewModels.IndexViewModel
 @{
-	ViewData["Title"] = "BuggyBuddy - Home";
+    ViewData["Title"] = "BuggyBuddy - Home";
 }
-
 <div class="flip-container">
-	<div class="flipper">
-		<div class="front">
-			<img class="heart-logo" src="../images/heart.png" />
-			<img class="basket-logo" src="../images/basket_blue.png" />
+    <div class="flipper">
+        <div class="front">
+            <img class="heart-logo" src="../images/heart.png" />
+            <img class="basket-logo" src="../images/basket_blue.png" />
+
+            <form asp-action="Login" id="login" name="form" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <input type="text" id="login-username" asp-for="LoginUserName" class="form-control" placeholder="Username" autocomplete="organization" autofocus="autofocus" />
+                    <span id="username-validate" class="validate-box">What's your username?</span>
+                    <span id="username-validate-triangle" class="validate-triangle"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" asp-for="LoginPassword" class="form-control" placeholder="Password" autocomplete="organization" autofocus="autofocus" />
+                    <span id="password-validate" class="validate-box">What's your password?</span>
+                    <span id="password-validate-triangle" class="validate-triangle"></span>
+                </div>
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="login-btn" type="submit" value="LOG IN" />
+                </div>
+            </form>
 
 
-			<form asp-action="Login" id="login" name="form" onsubmit="return validateForm()">
-				<div class="form-group">
-					<input type="text" id="login-username" asp-for="LoginUserName" class="form-control" placeholder="Username" autocomplete="organization" autofocus="autofocus" />
-					<span id="username-validate" class="validate-box">What's your username?</span>
-					<span id="username-validate-triangle" class="validate-triangle"></span>
-				</div>
-				<div class="form-group">
-					<input type="password" id="login-password" asp-for="LoginPassword" class="form-control" placeholder="Password" autocomplete="organization" autofocus="autofocus" />
-					<span id="password-validate" class="validate-box">What's your password?</span>
-					<span id="password-validate-triangle" class="validate-triangle"></span>
-				</div>
-				<div class="form-group">
-					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-					<input id="login-btn" type="submit" value="LOG IN" />
-				</div>
-			</form>
-
-			
-			<!--<form asp-action="Login" id="login">
-				<div class="form-group">
-					<input id="login-username" asp-for="LoginUserName" class="form-control" placeholder="Username" autocomplete="organization" autofocus="autofocus" />
-					<span id="login-username-danger" asp-validation-for="LoginUserName" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<input id="login-password" asp-for="LoginPassword" class="form-control" placeholder="Password" />
-					<span id="login-password-danger" asp-validation-for="LoginPassword" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-					<input id="login-btn" type="submit" value="LOG IN" />
-				</div>
-			</form>-->
-
-			<text id="signup-text">Don't have an account? <a id="signup-link">Sign up!</a></text>
-		</div>
-
-		<div class="back">
-			<img class="heart-logo"  src="../images/heart.png"/>
-			<img class="basket-logo" src="../images/basket_blue.png"/>
-			<form asp-action="Register" id="register" enctype="multipart/form-data">
-				<div id="register-forms">
-					<div class="form-group">
-						<select id="register-select-gender" asp-for="RegisterGender" class="form-control" placeholder="Gender" autocomplete="organization" autofocus="autofocus">
-							<option>I'm a...</option>
-							<option>Male</option>
-							<option>Female</option>
-							<option>Other</option>
-						</select>
-						<!--<span id="register-select-gender-danger" asp-validation-for="RegisterGender" class="text-danger"></span>-->
-					</div>
-					<div class="form-group">
-						<select id="register-select-interest" asp-for="RegisterInterest" class="form-control" placeholder="Interest" autocomplete="organization" autofocus="autofocus">
-							<option>Who likes...</option>
-							<option>Male</option>
-							<option>Female</option>
-							<option>Other</option>
-						</select>
-						<!--<span id="register-select-interest-danger" asp-validation-for="RegisterGender" class="text-danger"></span>-->
-					</div>
-					<div id="register-name-group">
-						<div class="form-group">
-							<input id="register-firstname" asp-for="RegisterFirstName" class="form-control" placeholder="First Name" autocomplete="organization" autofocus="autofocus" required />
-							<!--<span id="register-firstname-danger" asp-validation-for="RegisterFirstName" class="text-danger"></span>-->
-						</div>
-						<div class="form-group">
-							<input id="register-lastname" asp-for="RegisterLastName" class="form-control" placeholder="Last Name" autocomplete="organization" autofocus="autofocus" />
-							<!--<span id="register-lastname-danger" asp-validation-for="RegisterLastName" class="text-danger"></span>-->
-						</div>
-					</div>
-					<div class="form-group">
-						<input id="register-username" asp-for="RegisterUserName" class="form-control" placeholder="Username" autocomplete="organization" autofocus="autofocus" />
-						<!--<span id="register-username-danger" asp-validation-for="RegisterUserName" class="text-danger"></span>-->
-					</div>
-					<div class="form-group">
-						<input id="register-password" asp-for="RegisterPassword" class="form-control" placeholder="Password" />
-						<!--<span id="register-password-danger" asp-validation-for="RegisterPassword" class="text-danger"></span>-->
-					</div>
-					<div class="form-group">
-						<textarea id="register-info" type="" asp-for="RegisterInfo" class="form-control" placeholder="Tell us about yourself..."></textarea>
-						<!--<span id="register-info-danger" asp-validation-for="RegisterInfo" class="text-danger"></span>-->
-					</div>
-
-					<div class="form-group">
-						<img id="register-picture-default" src="../images/default-profile.png" />
-						<input id="picture" type="file" accept="image/*" onchange="loadFile(event)" class="form-control" name="picture">
-						<img id="output" />
-						<label id="register-picture-label">Upload a picture!</label>
-						<label for="picture" id="register-picture-icon">
-							<i class="fas fa-plus-circle"></i>
-						</label>
-					</div>
-
-				</div>
-				<div class="form-group">
-					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-					<input id="register-btn" type="submit" value="SIGN UP!" />
-				</div>
-			</form>
-			<text id="register-text">Already have an account? <a id="register-link" >Log in.</a></text>
-		</div>
-	</div>
+            <text id="signup-text">Don't have an account? <a id="signup-link">Sign up!</a></text>
+        </div>
+        <div class="back">
+            <img class="heart-logo" src="../images/heart.png" />
+            <img class="basket-logo" src="../images/basket_blue.png" />
+            <form asp-action="Register" id="register" enctype="multipart/form-data">
+                <div id="register-forms">
+                    <div class="form-group">
+                        <select id="register-select-gender" asp-for="RegisterGender" class="form-control" placeholder="Gender" autocomplete="organization" autofocus="autofocus">
+                            <option>I'm a...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="register-select-interest" asp-for="RegisterInterest" class="form-control" placeholder="Interest" autocomplete="organization" autofocus="autofocus">
+                            <option>Who likes...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div id="register-name-group">
+                        <div class="form-group">
+                            <input id="register-firstname" asp-for="RegisterFirstName" class="form-control" placeholder="First Name" autocomplete="organization" autofocus="autofocus" required />
+                        </div>
+                        <div class="form-group">
+                            <input id="register-lastname" asp-for="RegisterLastName" class="form-control" placeholder="Last Name" autocomplete="organization" autofocus="autofocus" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="register-username" asp-for="RegisterUserName" class="form-control" placeholder="Username" autocomplete="organization" autofocus="autofocus" />
+                    </div>
+                    <div class="form-group">
+                        <input id="register-password" asp-for="RegisterPassword" class="form-control" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="register-info" type="" asp-for="RegisterInfo" class="form-control" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <img id="register-picture-default" src="../images/default-profile.png" />
+                        <input id="picture" type="file" accept="image/*" onchange="loadFile(event)" class="form-control" name="picture">
+                        <img id="output" />
+                        <label id="register-picture-label">Upload a picture!</label>
+                        <label for="picture" id="register-picture-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="register-btn" type="submit" value="SIGN UP!" />
+                </div>
+            </form>
+            <text id="register-text">Already have an account? <a id="register-link">Log in.</a></text>
+        </div>
+    </div>
 </div>
 
-
-<script src ="../js/index.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/fontawesome-all.js"></script>
 
-
-
-	
 
