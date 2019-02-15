@@ -17,7 +17,6 @@ namespace web.buggybuddy.core.Controllers
 {
     public class HomeController : Controller
     {
-		//"Server=(localdb)\\mssqllocaldb;Database=BuggyBuddy;Trusted_Connection=True;MultipleActiveResultSets=true"
 		const string SessionKeyUserName = "_UserName";
 		const string SessionKeyFirstName = "_FirstName";
 		const string SessionKeyLastName = "_LastName";
