@@ -1,6 +1,4 @@
-using System;
-
-namespace web.buggybuddy.core.Models
+namespace buggybuddy.Models
 {
     public class ErrorViewModel
     {

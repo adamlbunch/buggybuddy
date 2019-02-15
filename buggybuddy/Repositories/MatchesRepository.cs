@@ -1,15 +1,13 @@
-﻿using Dapper;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
-using web.buggybuddy.core.Models.Dbos;
+using buggybuddy.Models.Dbos;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using web.buggybuddy.core.Models.ViewModels;
 
-namespace web.buggybuddy.core.Repositories
+namespace buggybuddy.Repositories
 {
     public class MatchesRepository : IMatchesRepository
     {

@@ -1,15 +1,11 @@
-﻿using Dapper;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using web.buggybuddy.core.Logic;
-using web.buggybuddy.core.Models.Dbos;
+using buggybuddy.Models.Dbos;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 
-namespace web.buggybuddy.core.Repositories
+namespace buggybuddy.Repositories
 {
     public class DenialsRepository : IDenialsRepository
     {

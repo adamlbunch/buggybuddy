@@ -1,15 +1,7 @@
-﻿using Microsoft.ApplicationInsights.Extensibility.Implementation;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using web.buggybuddy.core.Models.Dbos;
-using web.buggybuddy.core.Models.ViewModels;
-using web.buggybuddy.core.Repositories;
 
-namespace web.buggybuddy.core.Logic
+namespace buggybuddy.Logic
 {
 	public class ProfileLogic : IProfileLogic
 	{

@@ -1,17 +1,17 @@
-﻿using Dapper;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using web.buggybuddy.core.Logic;
-using web.buggybuddy.core.Models.Dbos;
+using buggybuddy.Logic;
+using buggybuddy.Models.Dbos;
+using buggybuddy.Models.ViewModels;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using web.buggybuddy.core.Models.ViewModels;
 
-namespace web.buggybuddy.core.Repositories
+namespace buggybuddy.Repositories
 {
     public class UserRepository : IUserRepository
     {

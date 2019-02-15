@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using buggybuddy.Logic;
+using buggybuddy.Models;
+using buggybuddy.Models.ViewModels;
+using buggybuddy.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using web.buggybuddy.core.Logic;
 using web.buggybuddy.core.Models;
-using web.buggybuddy.core.Models.Dbos;
 using web.buggybuddy.core.Models.ViewModels;
-using web.buggybuddy.core.Repositories;
 
-namespace web.buggybuddy.core.Controllers
+namespace buggybuddy.Controllers
 {
     public class HomeController : Controller
     {

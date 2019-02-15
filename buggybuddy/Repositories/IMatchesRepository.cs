@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using web.buggybuddy.core.Models.Dbos;
+﻿using System.Collections.Generic;
+using buggybuddy.Models.Dbos;
 using web.buggybuddy.core.Models.ViewModels;
 
-namespace web.buggybuddy.core.Repositories
+namespace buggybuddy.Repositories
 {
     public interface IMatchesRepository
     {

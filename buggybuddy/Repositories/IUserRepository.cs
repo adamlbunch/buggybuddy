@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using buggybuddy.Models.ViewModels;
 using web.buggybuddy.core.Models.ViewModels;
 
-namespace web.buggybuddy.core.Repositories
+namespace buggybuddy.Repositories
 {
     public interface IUserRepository
     {

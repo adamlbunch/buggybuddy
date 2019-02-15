@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using web.buggybuddy.core.Logic;
-using web.buggybuddy.core.Repositories;
+using buggybuddy.Logic;
+using buggybuddy.Repositories;
 
 namespace web.buggybuddy.core
 {

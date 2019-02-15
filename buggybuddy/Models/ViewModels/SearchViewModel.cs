@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace web.buggybuddy.core.Models.ViewModels
+﻿namespace buggybuddy.Models.ViewModels
 {
     public class SearchViewModel
     {
