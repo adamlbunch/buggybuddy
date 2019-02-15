@@ -1,0 +1,42 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/fontawesome-all.min.js",
+    "inputFiles": [
+      "wwwroot/js/fontawesome-all.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/profile.min.js",
+    "inputFiles": [
+      "wwwroot/js/profile.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/search.min.js",
+    "inputFiles": [
+      "wwwroot/js/search.js"
+    ]
+  }
+]

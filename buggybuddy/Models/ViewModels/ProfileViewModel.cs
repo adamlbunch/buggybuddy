@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using web.buggybuddy.core.Models.Dbos;
+
+namespace web.buggybuddy.core.Models.ViewModels
+{
+    public class ProfileViewModel
+    {
+		public string UserName { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string Gender { get; set; }
+		public string Interest { get; set; }
+		public string ProfilePicture { get; set; }
+		public string LastViewedProspect { get; set; }
+		public string DataFolder { get; set; }
+		public string Info { get; set; }
+		public List<ProfileViewModel> Matches { get; set; }
+    }
+}

@@ -1,0 +1,6 @@
+.vs/
+obj/
+bin/
+data/
+.vscode/
+.DS_Store/
