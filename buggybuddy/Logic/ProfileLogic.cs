@@ -16,7 +16,7 @@ namespace buggybuddy.Logic
 			if (directory.Any())
 			{
 				var input = directory.FirstOrDefault();
-				return ".." + input.Substring(input.IndexOf('/'));
+				return ".." + input?.Substring(input.IndexOf('/'));
 			}
 			return "../images/default-profile.png";
 		}
