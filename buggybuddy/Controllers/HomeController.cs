@@ -9,26 +9,25 @@ using buggybuddy.Models.ViewModels;
 using buggybuddy.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using web.buggybuddy.core.Models.ViewModels;
 
 namespace buggybuddy.Controllers
 {
     public class HomeController : Controller
     {
-		const string SessionKeyUserName = "_UserName";
-		const string SessionKeyFirstName = "_FirstName";
-		const string SessionKeyLastName = "_LastName";
-		const string SessionKeyGender = "_Gender";
-		const string SessionKeyInterest = "_Interest";
-		const string SessionKeyProfilePicture = "_ProfilePicture";
-		const string SessionKeyDataFolder = "_DataFolder";
-		const string SessionKeyProspectPicture = "_ProspectPicture";
-		const string SessionKeyLastViewedProspect = "_LastViewedProspect";
-		const string SessionKeyInfo = "_Info";
+        private const string SessionKeyUserName = "_UserName";
+        private const string SessionKeyFirstName = "_FirstName";
+        private const string SessionKeyLastName = "_LastName";
+        public const string SessionKeyGender = "_Gender";
+        public const string SessionKeyInterest = "_Interest";
+        public const string SessionKeyProfilePicture = "_ProfilePicture";
+        private const string SessionKeyDataFolder = "_DataFolder";
+        public const string SessionKeyProspectPicture = "_ProspectPicture";
+        public const string SessionKeyLastViewedProspect = "_LastViewedProspect";
+        private const string SessionKeyInfo = "_Info";
 
-		const string SessionKeyProspectUserName = "_ProspectUserName";
-		const string SessionKeySearchProspectPicture = "_ProspectPicture";
-		const string SessionKeyMatchSuccessMessage = "_MatchSuccessMessage";
+        public const string SessionKeyProspectUserName = "_ProspectUserName";
+        public const string SessionKeySearchProspectPicture = "_ProspectPicture";
+        public const string SessionKeyMatchSuccessMessage = "_MatchSuccessMessage";
 
 
 		private readonly IUserRepository _userRepository;
@@ -67,58 +66,53 @@ namespace buggybuddy.Controllers
 			{
 				ModelState.Remove(key);
 			}
-				
 
-			if (ModelState.IsValid)
-			{
-				var response = _userRepository.AttemptLogin(model);
-				
+		    if (!ModelState.IsValid) return View("Index", model);
 
-				if (response.Success)
-				{
+		    var response = _userRepository.AttemptLogin(model);
+		    if (response.Success)
+		    {
 					
 					
-					var profileModel = new ProfileViewModel
-					{
-						UserName = response.Model.UserName,
-						FirstName = response.Model.FirstName,
-						LastName = response.Model.LastName,
-						Gender = response.Model.Gender,
-						Interest = response.Model.Interest,
-						ProfilePicture = _profileLogic.SetPicture(response.Model.DataFolder),
-						LastViewedProspect = "",
-						DataFolder = response.Model.DataFolder,
-						Info = response.Model.Info
-					};
+		        var profileModel = new ProfileViewModel
+		        {
+		            UserName = response.Model.UserName,
+		            FirstName = response.Model.FirstName,
+		            LastName = response.Model.LastName,
+		            Gender = response.Model.Gender,
+		            Interest = response.Model.Interest,
+		            ProfilePicture = _profileLogic.SetPicture(response.Model.DataFolder),
+		            LastViewedProspect = "",
+		            DataFolder = response.Model.DataFolder,
+		            Info = response.Model.Info
+		        };
 
-					var matches = new List<ProfileViewModel>();
-					foreach (var match in _matchesRepository.GetMatches(profileModel))
-					{
-						var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
+		        var matches = new List<ProfileViewModel>();
+		        foreach (var match in _matchesRepository.GetMatches(profileModel))
+		        {
+		            var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-						string matchPath = "../images/default-profile.png";
-						if (directory.Any())
-						{
-							matchPath = directory.FirstOrDefault();
-							matchPath = ".." + matchPath.Substring(matchPath.IndexOf('/'));
-						}
+		            var matchPath = "../images/default-profile.png";
+		            if (directory.Any())
+		            {
+		                matchPath = directory.FirstOrDefault();
+		                matchPath = ".." + matchPath.Substring(matchPath.IndexOf('/'));
+		            }
 
-						matches.Add(new ProfileViewModel
-						{
-							UserName = match.Prospect,
-							ProfilePicture = matchPath
-						});
-					}
-					profileModel.Matches = matches;
+		            matches.Add(new ProfileViewModel
+		            {
+		                UserName = match.Prospect,
+		                ProfilePicture = matchPath
+		            });
+		        }
+		        profileModel.Matches = matches;
 
-					SetSessionVariables(profileModel);
-					return View("Profile", profileModel);
-				}
+		        SetSessionVariables(profileModel);
+		        return View("Profile", profileModel);
+		    }
 
-				ModelState.AddModelError(string.Empty, response.Message);
-
-			}
-			return View("Index", model);
+		    ModelState.AddModelError(string.Empty, response.Message);
+		    return View("Index", model);
 		}
 
 		[HttpPost]
@@ -130,68 +124,62 @@ namespace buggybuddy.Controllers
 				ModelState.Remove(key);
 			}
 
-			if (ModelState.IsValid)
-			{
+		    if (!ModelState.IsValid) return View("Index", model);
 
-				
-				var response = _userRepository.AttemptRegister(model);
+		    var response = _userRepository.AttemptRegister(model);
+		    if (response.Success)
+		    {
+		        if (picture != null)
+		        {
+		            var picturePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\" + response.Model.DataFolder + "\\profilePicture", picture.FileName);
 
-
-				if (response.Success)
-				{
-					if (picture != null)
-					{
-						var picturePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\" + response.Model.DataFolder + "\\profilePicture", picture.FileName);
-
-						using (var stream = new FileStream(picturePath, FileMode.Create))
-						{
-							await picture.CopyToAsync(stream);
-						}
-					}
+		            using (var stream = new FileStream(picturePath, FileMode.Create))
+		            {
+		                await picture.CopyToAsync(stream);
+		            }
+		        }
 					
 
-					var profileModel = new ProfileViewModel
-					{
-						UserName = response.Model.UserName,
-						FirstName = response.Model.FirstName,
-						LastName = response.Model.LastName,
-						Gender = response.Model.Gender,
-						Interest = response.Model.Interest,
-						ProfilePicture = _profileLogic.SetPicture(response.Model.DataFolder),
-						LastViewedProspect = "",
-						DataFolder = response.Model.DataFolder,
-						Info = response.Model.Info,
+		        var profileModel = new ProfileViewModel
+		        {
+		            UserName = response.Model.UserName,
+		            FirstName = response.Model.FirstName,
+		            LastName = response.Model.LastName,
+		            Gender = response.Model.Gender,
+		            Interest = response.Model.Interest,
+		            ProfilePicture = _profileLogic.SetPicture(response.Model.DataFolder),
+		            LastViewedProspect = "",
+		            DataFolder = response.Model.DataFolder,
+		            Info = response.Model.Info,
 						
-					};
+		        };
 
-					var matches = new List<ProfileViewModel>();
-					foreach (var match in _matchesRepository.GetMatches(profileModel))
-					{
-						var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
+		        var matches = new List<ProfileViewModel>();
+		        foreach (var match in _matchesRepository.GetMatches(profileModel))
+		        {
+		            var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-						string matchPath = "../images/default-profile.png";
-						if (directory.Any())
-						{
-							matchPath = directory.FirstOrDefault();
-							matchPath = ".." + matchPath.Substring(matchPath.IndexOf('/'));
-						}
+		            string matchPath = "../images/default-profile.png";
+		            if (directory.Any())
+		            {
+		                matchPath = directory.FirstOrDefault();
+		                matchPath = ".." + matchPath.Substring(matchPath.IndexOf('/'));
+		            }
 
-						matches.Add(new ProfileViewModel
-						{
-							UserName = match.Prospect,
-							ProfilePicture = matchPath
-						});
-					}
-					profileModel.Matches = matches;
+		            matches.Add(new ProfileViewModel
+		            {
+		                UserName = match.Prospect,
+		                ProfilePicture = matchPath
+		            });
+		        }
+		        profileModel.Matches = matches;
 
-					SetSessionVariables(profileModel);
-					return View("Profile", profileModel);
-				}
+		        SetSessionVariables(profileModel);
+		        return View("Profile", profileModel);
+		    }
 
-				ModelState.AddModelError(string.Empty, response.Message);
-
-			}
-			return View("Index", model);
+		    ModelState.AddModelError(string.Empty, response.Message);
+		    return View("Index", model);
 		}
 
 		[HttpGet]
@@ -204,7 +192,7 @@ namespace buggybuddy.Controllers
 			{
 				var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-				string matchPath = "../images/default-profile.png";
+				var matchPath = "../images/default-profile.png";
 				if (directory.Any())
 				{
 					matchPath = directory.FirstOrDefault();
@@ -242,7 +230,7 @@ namespace buggybuddy.Controllers
 			{
 				var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-				string matchPath = "../images/default-profile.png";
+				var matchPath = "../images/default-profile.png";
 				if (directory.Any())
 				{
 					matchPath = directory.FirstOrDefault();
@@ -295,12 +283,12 @@ namespace buggybuddy.Controllers
 			}
 
 			var matches = new List<ProfileViewModel>();
-			foreach (var match in _matchesRepository.GetMatches(currentUser))
+		    var matchPath = "../images/default-profile.png";
+		    foreach (var match in _matchesRepository.GetMatches(currentUser))
 			{
 				var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-				string matchPath = "../images/default-profile.png";
-				if (directory.Any())
+			    if (directory.Any())
 				{
 					matchPath = directory.FirstOrDefault();
 					matchPath = ".." + matchPath.Substring(matchPath.IndexOf('/'));
@@ -365,7 +353,7 @@ namespace buggybuddy.Controllers
 			{
 				var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-				string matchPath = "../images/default-profile.png";
+				var matchPath = "../images/default-profile.png";
 				if (directory.Any())
 				{
 					matchPath = directory.FirstOrDefault();

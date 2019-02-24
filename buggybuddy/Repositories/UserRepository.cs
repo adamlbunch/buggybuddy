@@ -9,7 +9,6 @@ using buggybuddy.Models.Dbos;
 using buggybuddy.Models.ViewModels;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using web.buggybuddy.core.Models.ViewModels;
 
 namespace buggybuddy.Repositories
 {

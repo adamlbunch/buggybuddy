@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using buggybuddy.Models.Dbos;
-using web.buggybuddy.core.Models.ViewModels;
+using buggybuddy.Models.ViewModels;
 
 namespace buggybuddy.Repositories
 {

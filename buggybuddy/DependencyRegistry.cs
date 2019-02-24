@@ -1,12 +1,8 @@
-﻿using StructureMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using buggybuddy.Logic;
+﻿using buggybuddy.Logic;
 using buggybuddy.Repositories;
+using StructureMap;
 
-namespace web.buggybuddy.core
+namespace buggybuddy
 {
     public class DependencyRegistry : Registry
     {
@@ -15,7 +11,6 @@ namespace web.buggybuddy.core
 			For<IUserRepository>().Add<UserRepository>();
 			For<IDenialsRepository>().Add<DenialsRepository>();
 			For<IMatchesRepository>().Add<MatchesRepository>();
-
 			For<IProfileLogic>().Add<ProfileLogic>();
 		}
     }

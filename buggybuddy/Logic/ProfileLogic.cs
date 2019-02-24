@@ -13,12 +13,10 @@ namespace buggybuddy.Logic
 			}
 			var directory = Directory.GetFiles("wwwroot/" + path + "/profilePicture/");
 
-			if (directory.Any())
-			{
-				var input = directory.FirstOrDefault();
-				return ".." + input?.Substring(input.IndexOf('/'));
-			}
-			return "../images/default-profile.png";
+		    if (!directory.Any()) return "../images/default-profile.png";
+
+		    var input = directory.FirstOrDefault();
+		    return ".." + input?.Substring(input.IndexOf('/'));
 		}
 	}
 }
