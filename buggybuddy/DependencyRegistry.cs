@@ -11,7 +11,6 @@ namespace buggybuddy
 			For<IUserRepository>().Add<UserRepository>();
 			For<IDenialsRepository>().Add<DenialsRepository>();
 			For<IMatchesRepository>().Add<MatchesRepository>();
-
 			For<IProfileLogic>().Add<ProfileLogic>();
 		}
     }

@@ -4,20 +4,20 @@ setTimeout(function(){
     document.getElementById("profile-name").style.opacity = "1";
     document.getElementById("back-arrow").style.opacity = "1";
      
-    }, 500);
+}, 500);
  
 setTimeout(function(){ 
     document.getElementById("profile-info").style.opacity = "1";
-    }, 700);
+}, 700);
 
 setTimeout(function(){ 
     document.getElementById("profile-description").style.opacity = "1";
-    }, 800);
+}, 800);
  
 setTimeout(function(){ 
     document.getElementById("search-btn-yes").style.opacity = "1";
     document.getElementById("search-btn-no").style.opacity = "1";
-    }, 900);
+}, 900);
 
 document.getElementById("search-btn-yes").onclick = function() {
     document.getElementById("like-img").style.opacity = "1";
@@ -74,8 +74,7 @@ document.getElementById("search-btn-yes").onclick = function() {
     setTimeout(function(){ 
         document.getElementById("match").submit();
     }, 1300);
-
-}
+};
 
 document.getElementById("search-btn-no").onclick = function() {
     document.getElementById("nope-img").style.opacity = "1";
@@ -110,15 +109,11 @@ document.getElementById("search-btn-no").onclick = function() {
         document.getElementById("nope-img").style.opacity = "0";
     }, 500);
 
-
-
     /*
     setTimeout(function(){
         document.getElementById("profile-pic").style.top = "60vh";
     }, 700);
     */
-
-
 
     setTimeout(function(){
         document.getElementById("profile-pic").style.top = "100vh";
@@ -128,7 +123,5 @@ document.getElementById("search-btn-no").onclick = function() {
     setTimeout(function(){ 
         document.getElementById("deny").submit();
     }, 900);
-
-
-}
+};
 

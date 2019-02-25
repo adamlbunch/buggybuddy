@@ -24,7 +24,7 @@ namespace buggybuddy.Repositories
 			_profileLogic = profileLogic;
 		}
 
-		private IDbConnection connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
+		private IDbConnection Connection => new SqlConnection(_configuration["ConnectionStrings:BuggyBuddy"]);
 
 		public UserResponse AttemptRegister(IndexViewModel model)
 		{
@@ -40,10 +40,10 @@ namespace buggybuddy.Repositories
 				Info = model.RegisterInfo
 			};
 
-			List<User> entries = new List<User>();
-			using (connection)
+			List<User> entries;
+			using (Connection)
 			{
-				entries = connection.Query<User>(sQuery, new
+				entries = Connection.Query<User>(sQuery, new
 				{
 					user.UserName
 				}).ToList();
@@ -81,9 +81,9 @@ namespace buggybuddy.Repositories
 
 			sQuery = @"INSERT INTO [dbo].[User]([UserName], [FirstName], [LastName], [Password], [Gender], [Interest], [DataFolder], [Info]) VALUES 
 						(@UserName, @FirstName, @LastName, @Password, @Gender, @Interest, @DataFolder, @Info)";
-			using (connection)
+			using (Connection)
 			{
-				connection.Execute(sQuery, new
+				Connection.Execute(sQuery, new
 				{
 					UserName = model.RegisterUserName,
 					FirstName = model.RegisterFirstName,
@@ -106,17 +106,17 @@ namespace buggybuddy.Repositories
 
 		public UserResponse AttemptLogin(IndexViewModel model)
 		{
-			var sQuery = "SELECT * FROM [dbo].[User] WHERE [UserName] = @UserName and [Password] = @Password";
+			const string sQuery = "SELECT * FROM [dbo].[User] WHERE [UserName] = @UserName and [Password] = @Password";
 			var user = new User
 			{
 				UserName = model.LoginUserName,
 				Password = model.LoginPassword
 			};
 
-			List<User> entries = new List<User>();
-			using (connection)
+			List<User> entries;
+			using (Connection)
 			{
-				entries = connection.Query<User>(sQuery, new
+				entries = Connection.Query<User>(sQuery, new
 				{
 					user.UserName,
 					user.Password
@@ -142,82 +142,85 @@ namespace buggybuddy.Repositories
 
 		public UserResponse RequestRandomUser(ProfileViewModel model)
 		{
-			string sQuery = @"SELECT * FROM [dbo].[User] WHERE
+			var sQuery = @"SELECT * FROM [dbo].[User] WHERE
 							[UserName] != @UserName AND [Gender] = @Interest
 							ORDER BY NEWID()";
 
 			var users = new List<User>();
-			using (connection)
+			using (Connection)
 			{
-				users = connection.Query<User>(sQuery, new
+				users = Connection.Query<User>(sQuery, new
 				{
 					UserName = model.UserName,
 					Interest = model.Interest
 				}).ToList();
 			}
 
-			if (users.Any())
-			{
-				sQuery = @"SELECT * FROM [dbo].[Denials] WHERE
+		    if (!users.Any())
+		        return new UserResponse
+		        {
+		            Success = false,
+		            Message = "There are currently no other users in your area."
+		        };
+
+		    sQuery = @"SELECT * FROM [dbo].[Denials] WHERE
 					[User] = @UserName";
 
-				var denials = new List<Denial>();
-				using (connection)
-				{
-					denials = connection.Query<Denial>(sQuery, new
-					{
-						UserName = model.UserName
-					}).ToList();
-				}
+		    var denials = new List<Denial>();
+		    using (Connection)
+		    {
+		        denials = Connection.Query<Denial>(sQuery, new
+		        {
+		            UserName = model.UserName
+		        }).ToList();
+		    }
 
-				sQuery = @"SELECT * FROM [dbo].[Matches] WHERE
+		    sQuery = @"SELECT * FROM [dbo].[Matches] WHERE
 					[User] = @UserName";
 
-				var matches = new List<Match>();
-				using (connection)
-				{
-					matches = connection.Query<Match>(sQuery, new
-					{
-						UserName = model.UserName
-					}).ToList();
-				}
+		    List<Match> matches;
+		    using (Connection)
+		    {
+		        matches = Connection.Query<Match>(sQuery, new
+		        {
+		            UserName = model.UserName
+		        }).ToList();
+		    }
 
-				var approved = new List<User>(users);
-				foreach (var denial in denials)
-				{
-					foreach (var user in users)
-					{
-						if (denial.Prospect == user.UserName)
-						{
-							approved.Remove(user);
-						}
-					}
-				}
+		    var approved = new List<User>(users);
+		    foreach (var denial in denials)
+		    {
+		        foreach (var user in users)
+		        {
+		            if (denial.Prospect == user.UserName)
+		            {
+		                approved.Remove(user);
+		            }
+		        }
+		    }
 
-				foreach (var match in matches)
-				{
-					foreach (var user in users)
-					{
-						if (match.Prospect == user.UserName)
-						{
-							approved.Remove(user);
-						}
-					}
-				}
+		    foreach (var match in matches)
+		    {
+		        foreach (var user in users)
+		        {
+		            if (match.Prospect == user.UserName)
+		            {
+		                approved.Remove(user);
+		            }
+		        }
+		    }
 
-				if (approved.Any())
-				{
-					return new UserResponse
-					{
-						Model = approved.FirstOrDefault(),
-						Success = true,
-						Message = "Successfully found a random user."
-					};
-				}
-			}
+		    if (approved.Any())
+		    {
+		        return new UserResponse
+		        {
+		            Model = approved.FirstOrDefault(),
+		            Success = true,
+		            Message = "Successfully found a random user."
+		        };
+		    }
 
-
-			/*if (users.Any())
+		    /*if (users.Any())
 			{
 				return new UserResponse
 				{
@@ -227,14 +230,12 @@ namespace buggybuddy.Repositories
 				};
 			}*/
 			
-
 			return new UserResponse
 			{
 				Success = false,
 				Message = "There are currently no other users in your area."
 			};
 		}
-
 	}
 
 	public class UserResponse
