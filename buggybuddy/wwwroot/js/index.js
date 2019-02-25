@@ -1,27 +1,24 @@
-document.getElementById("signup-link").onclick = function(){
-	document.getElementsByClassName("flipper")[0].style.transform = "rotateY(180deg)";
-	document.getElementsByClassName("heart-logo")[0].style.animationName = "bounce-back";
-}
+document.getElementById("signup-link").onclick = function() {
+    document.getElementsByClassName("flipper")[0].style.transform = "rotateY(180deg)";
+    document.getElementsByClassName("heart-logo")[0].style.animationName = "bounce-back";
+};
 
-document.getElementById("register-link").onclick = function(){
-	document.getElementsByClassName("flipper")[0].style.transform = "rotateY(0deg)";
-	document.getElementsByClassName("heart-logo")[0].style.animationName = "bounce-front";
-}
+document.getElementById("register-link").onclick = function() {
+    document.getElementsByClassName("flipper")[0].style.transform = "rotateY(0deg)";
+    document.getElementsByClassName("heart-logo")[0].style.animationName = "bounce-front";
+};
 
 document.getElementById("login-btn").onmousedown = function() {
 	document.getElementById("login-btn").style.transform = "scale(0.95)";
 };
 
-
 document.getElementById("login-btn").onmouseup = function() {
 	document.getElementById("login-btn").style.transform = "scale(1)";
 };
 
-
 document.getElementById("register-btn").onmousedown = function() {
 	document.getElementById("register-btn").style.transform = "scale(0.95)";
 };
-
 
 document.getElementById("register-btn").onmouseup = function() {
 	document.getElementById("register-btn").style.transform = "scale(1)";

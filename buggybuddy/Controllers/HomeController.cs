@@ -72,8 +72,6 @@ namespace buggybuddy.Controllers
 		    var response = _userRepository.AttemptLogin(model);
 		    if (response.Success)
 		    {
-					
-					
 		        var profileModel = new ProfileViewModel
 		        {
 		            UserName = response.Model.UserName,
