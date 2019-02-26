@@ -9,6 +9,13 @@
     background: linear-gradient(#87ceeb,#fff) no-repeat center center fixed
 }
 
+#validation-summary {
+    position: relative;
+    left: 350px;
+    color: red;
+    font-size: 15px;
+}
+
 .flip-container {
     z-index: 1;
     position: absolute;

@@ -1,51 +1,48 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.Azure.KeyVault.Models;
 
 namespace buggybuddy.Models.ViewModels
 {
     public class IndexViewModel
     {
-		[Display(Name = "User Name", Prompt = "Enter your user name.")]
 		[StringLength(16, MinimumLength = 3)]
 		[RegularExpression(@"^[a-zA-Z0-9]*$")]
-		[Required]
-		public string LoginUserName { get; set; }
+        [Required(ErrorMessage = "Enter your username")]
+        public string LoginUserName { get; set; }
 
-		[Display(Name = "Password", Prompt = "Enter your password.")]
+		[Display(Name = "Password", Prompt = "Enter your password")]
 		[DataType(DataType.Password)]
-		[Required]
-		public string LoginPassword { get; set; }
+        [Required(ErrorMessage = "Please enter a password")]
+        public string LoginPassword { get; set; }
 
-		[Display(Name = "First Name", Prompt = "Enter a 1 to 25 alpha name.")]
-		[StringLength(25, MinimumLength = 1)]
+        [StringLength(25, MinimumLength = 1)]
 		[RegularExpression(@"^[a-zA-Z]+$")]
-		[Required]
-		public string RegisterFirstName { get; set; }
+        [Required(ErrorMessage = "Please enter your first name")]
+        public string RegisterFirstName { get; set; }
 
-		[Display(Name = "Last Name", Prompt = "Enter a 1 to 25 alpha name.")]
+		[Display(Name = "Last Name", Prompt = "Enter a 1 to 25 alpha name")]
 		[StringLength(25, MinimumLength = 1)]
 		[RegularExpression(@"^[a-zA-Z]+$")]
 		[Required]
 		public string RegisterLastName { get; set; }
 
-		[Required]
+        [Required(ErrorMessage = "Select your gender")]
 		public string RegisterGender { get; set; }
 
-		[Required]
+        [Required(ErrorMessage = "Select the gender you are Interested in")]
 		public string RegisterInterest { get; set; }
 
-		[Required]
-		public string RegisterInfo { get; set; }
-
-		[Display(Name = "User Name", Prompt = "Enter a unique user name.")]
-		[StringLength(16, MinimumLength = 3)]
+		[StringLength(16, MinimumLength = 4)]
 		[RegularExpression(@"^[a-zA-Z0-9]*$")]
-		[Required]
+		[Required(ErrorMessage = "Enter a unique user name.")]
 		public string RegisterUserName { get; set; }
 
-		[Display(Name = "Password", Prompt = "Enter a 4 to 16 key password.")]
 		[StringLength(16, MinimumLength = 4)]
 		[DataType(DataType.Password)]
-		[Required]
+		[Required (ErrorMessage = "Enter a valid password")]
 		public string RegisterPassword { get; set; }
-	}
+
+        [Required(ErrorMessage = "Tell us something about yourself")]
+        public string RegisterInfo { get; set; }
+    }
 }

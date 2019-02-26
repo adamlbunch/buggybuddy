@@ -117,13 +117,15 @@ namespace buggybuddy.Controllers
 		public async Task<IActionResult> Register(IndexViewModel model, IFormFile picture)
 		{
 			HttpContext.Session.Clear();
+
+            // This is here because we are attempting to make a single page Login/Register system, which doesn't play well with the MVC pattern
 			foreach (var key in ModelState.Keys.Where(m => m.StartsWith("Login")).ToList())
 			{
 				ModelState.Remove(key);
 			}
 
 		    if (!ModelState.IsValid) return View("Index", model);
-
+        
 		    var response = _userRepository.AttemptRegister(model);
 		    if (response.Success)
 		    {

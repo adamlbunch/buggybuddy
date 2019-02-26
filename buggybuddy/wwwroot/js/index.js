@@ -25,30 +25,30 @@ document.getElementById("register-btn").onmouseup = function() {
 };
 
 //Front end validation, unfinished
-function validateForm() {
-    var x = document.forms["form"]["login-username"].value;
-	var y = document.forms["form"]["login-password"].value;
-    if (x == "") {
-        document.getElementById("username-validate").style.opacity = "1";
-		document.getElementById("username-validate-triangle").style.opacity = "1";
-
-		if (y == ""){
-			document.getElementById("password-validate").style.opacity = "1";
-			document.getElementById("password-validate-triangle").style.opacity = "1";
-		}
-    } 
-
-	else if (x != ""){
-		document.getElementById("username-validate").style.opacity = "0";
-		document.getElementById("username-validate-triangle").style.opacity = "0";
-
-		if (y != ""){
-			document.getElementById("password-validate").style.opacity = "0";
-			document.getElementById("password-validate-triangle").style.opacity = "0";
-
-		}
-	}
-}
+//function validateForm() {
+//    var x = document.forms["form"]["login-username"].value;
+//	var y = document.forms["form"]["login-password"].value;
+//    if (x == "") {
+//        document.getElementById("username-validate").style.opacity = "1";
+//		document.getElementById("username-validate-triangle").style.opacity = "1";
+//
+//		if (y == ""){
+//			document.getElementById("password-validate").style.opacity = "1";
+//			document.getElementById("password-validate-triangle").style.opacity = "1";
+//		}
+//    } 
+//
+//	else if (x != ""){
+//		document.getElementById("username-validate").style.opacity = "0";
+//		document.getElementById("username-validate-triangle").style.opacity = "0";
+//
+//		if (y != ""){
+//			document.getElementById("password-validate").style.opacity = "0";
+//			document.getElementById("password-validate-triangle").style.opacity = "0";
+//
+//		}
+//	}
+//}
 
 //Preview img
   var loadFile = function(event) {
