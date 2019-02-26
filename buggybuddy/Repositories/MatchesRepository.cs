@@ -22,7 +22,7 @@ namespace buggybuddy.Repositories
 
 		public DataResponse<Match> CheckForMatch(ProfileViewModel profile)
 		{
-			var sQuery = @"SELECT * FROM [dbo].[Matches]
+			var sQuery = @"SELECT * FROM [dbo].[Match]
 						WHERE [User] = @Prospect and [Prospect] = @User";
 
 			var entries = new List<Match>();
@@ -54,7 +54,7 @@ namespace buggybuddy.Repositories
 
 		public void AddMatch(string user, string prospect)
 		{
-			var sQuery = @"INSERT INTO [dbo].[Matches]([User], [Prospect]) VALUES 
+			var sQuery = @"INSERT INTO [dbo].[Match]([User], [Prospect]) VALUES 
 						(@User, @Prospect)";
 
 			using (Connection)
@@ -69,7 +69,7 @@ namespace buggybuddy.Repositories
 
 		public IEnumerable<Match> GetMatches(ProfileViewModel user)
 		{
-			var sQuery = @"SELECT * FROM [dbo].[Matches]
+			var sQuery = @"SELECT * FROM [dbo].[Match]
 						 WHERE [User] = @User";
 
 			var userInUsers = new List<Match>();
@@ -81,7 +81,7 @@ namespace buggybuddy.Repositories
 				}).ToList();
 			}
 
-			sQuery = @"SELECT * FROM [dbo].[Matches]
+			sQuery = @"SELECT * FROM [dbo].[Match]
 					 WHERE [Prospect] = @User";
 
 			var userInProspects = new List<Match>();

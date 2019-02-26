@@ -20,8 +20,8 @@ namespace buggybuddy.Repositories
 
 		public void AddDenial(string user, string prospect)
 		{
-			var sQuery = @"INSERT INTO [dbo].[Denials]([User], [Prospect], [LastChecked]) VALUES 
-						(@User, @Prospect, @LastChecked)";
+			var sQuery = @"INSERT INTO [dbo].[Denial]([User], [Prospect]) VALUES 
+						(@User, @Prospect)";
 
 			using (Connection)
 			{
@@ -29,7 +29,6 @@ namespace buggybuddy.Repositories
 				{
 					User = user,
 					Prospect = prospect,
-					LastChecked = DateTime.Now
 				});
 			}
 		}

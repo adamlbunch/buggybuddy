@@ -163,7 +163,7 @@ namespace buggybuddy.Repositories
 		            Message = "There are currently no other users in your area."
 		        };
 
-		    sQuery = @"SELECT * FROM [dbo].[Denials] WHERE
+		    sQuery = @"SELECT * FROM [dbo].[Denial] WHERE
 					[User] = @UserName";
 
 		    var denials = new List<Denial>();
@@ -175,7 +175,7 @@ namespace buggybuddy.Repositories
 		        }).ToList();
 		    }
 
-		    sQuery = @"SELECT * FROM [dbo].[Matches] WHERE
+		    sQuery = @"SELECT * FROM [dbo].[Match] WHERE
 					[User] = @UserName";
 
 		    List<Match> matches;
