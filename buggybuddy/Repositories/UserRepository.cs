@@ -148,6 +148,11 @@ namespace buggybuddy.Repositories
 
 		public UserResponse RequestRandomUser(ProfileViewModel model)
 		{
+            // There is an issue where you will be shown people of your gender of interest
+            // even if they are not interested in YOUR gender
+            // For example, a male who is interested in females, will still be shown
+            // females who are not interested in males
+            
 			var sQuery = @"SELECT * FROM [dbo].[User] WHERE
 							[UserName] != @UserName AND [Gender] = @Interest
 							ORDER BY NEWID()";
@@ -225,16 +230,6 @@ namespace buggybuddy.Repositories
 		            Message = "Successfully found a random user"
 		        };
 		    }
-
-		    /*if (users.Any())
-			{
-				return new UserResponse
-				{
-					Model = entries.FirstOrDefault(),
-					Success = true,
-					Message = "Successfully found a random user."
-				};
-			}*/
 			
 			return new UserResponse
 			{

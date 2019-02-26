@@ -391,16 +391,6 @@ namespace buggybuddy.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-		public IActionResult ProfileTest()
-		{
-			return View();
-		}
-
-		public IActionResult SearchTest()
-		{
-			return View();
-		}
-
 		private void SetSessionVariables(ProfileViewModel model)
 		{
 			HttpContext.Session.SetString(SessionKeyUserName, model.UserName);
