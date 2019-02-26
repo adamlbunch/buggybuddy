@@ -10,7 +10,6 @@ namespace buggybuddy.Models.ViewModels
         [Required(ErrorMessage = "Enter your username")]
         public string LoginUserName { get; set; }
 
-
 		[DataType(DataType.Password)]
         [Required(ErrorMessage = "Enter your password")]
         public string LoginPassword { get; set; }

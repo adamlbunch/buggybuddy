@@ -60,11 +60,11 @@ namespace buggybuddy.Repositories
 		}
 
 		public void AddMatch(string user, string prospect)
-		{
-			var sQuery = @"INSERT INTO [dbo].[Match]([User], [Prospect]) VALUES 
+        {
+            const string sQuery = @"INSERT INTO [dbo].[Match]([User], [Prospect]) VALUES 
 						(@User, @Prospect)";
 
-			using (Connection)
+            using (Connection)
 			{
 				Connection.Execute(sQuery, new
 				{
@@ -72,14 +72,14 @@ namespace buggybuddy.Repositories
 					Prospect = prospect
 				});
 			}
-		}
+        }
 
 		public IEnumerable<Match> GetMatches(ProfileViewModel user)
 		{
 			var sQuery = @"SELECT * FROM [dbo].[Match]
 						 WHERE [User] = @User";
 
-			var userInUsers = new List<Match>();
+			List<Match> userInUsers;
 			using (Connection)
 			{
 				userInUsers = Connection.Query<Match>(sQuery, new
@@ -91,7 +91,7 @@ namespace buggybuddy.Repositories
 			sQuery = @"SELECT * FROM [dbo].[Match]
 					 WHERE [Prospect] = @User";
 
-			var userInProspects = new List<Match>();
+			List<Match> userInProspects;
 			using (Connection)
 			{
 				userInProspects = Connection.Query<Match>(sQuery, new

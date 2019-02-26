@@ -138,7 +138,6 @@ namespace buggybuddy.Controllers
 		                await picture.CopyToAsync(stream);
 		            }
 		        }
-					
 
 		        var profileModel = new ProfileViewModel
 		        {
@@ -151,7 +150,6 @@ namespace buggybuddy.Controllers
 		            LastViewedProspect = "",
 		            DataFolder = response.Model.DataFolder,
 		            Info = response.Model.Info,
-						
 		        };
 
 		        var matches = new List<ProfileViewModel>();
@@ -159,7 +157,7 @@ namespace buggybuddy.Controllers
 		        {
 		            var directory = Directory.GetFiles("wwwroot/data/" + match.Prospect + "/profilePicture/");
 
-		            string matchPath = "../images/default-profile.png";
+		            var matchPath = "../images/default-profile.png";
 		            if (directory.Any())
 		            {
 		                matchPath = directory.FirstOrDefault();

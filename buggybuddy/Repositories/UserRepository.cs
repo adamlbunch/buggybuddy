@@ -34,7 +34,6 @@ namespace buggybuddy.Repositories
 
 		public UserResponse AttemptRegister(IndexViewModel model)
 		{
-			var sQuery = "SELECT * FROM [dbo].[User] WHERE [UserName] = @UserName";
 			var user = new User
 			{
 				FirstName = model.RegisterFirstName,
@@ -46,7 +45,8 @@ namespace buggybuddy.Repositories
 				Info = model.RegisterInfo
 			};
 
-			List<User> entries;
+            var sQuery = "SELECT * FROM [dbo].[User] WHERE [UserName] = @UserName";
+            List<User> entries;
 			using (Connection)
 			{
 				entries = Connection.Query<User>(sQuery, new
@@ -60,7 +60,7 @@ namespace buggybuddy.Repositories
 				return new UserResponse
 				{
 					Success = false,
-					Message = "User ID already Exists"
+					Message = "Username already Exists"
 				};
 			}
 
@@ -106,7 +106,7 @@ namespace buggybuddy.Repositories
 			{
 				Model = user,
 				Success = true,
-				Message = "User Successfully Created"
+				Message = "User successfully created"
 			};
 		}
 
@@ -135,14 +135,14 @@ namespace buggybuddy.Repositories
 				{
 					Model = entries.FirstOrDefault(),
 					Success = true,
-					Message = "Successfully Logged in."
+					Message = "Successfully logged in"
 				};
 			}
 
 			return new UserResponse
 			{
 				Success = false,
-				Message = "Incorrect User name or password."
+				Message = "Incorrect username or password"
 			};
 		}
 
@@ -152,7 +152,7 @@ namespace buggybuddy.Repositories
 							[UserName] != @UserName AND [Gender] = @Interest
 							ORDER BY NEWID()";
 
-			var users = new List<User>();
+			List<User> users;
 			using (Connection)
 			{
 				users = Connection.Query<User>(sQuery, new
@@ -166,13 +166,13 @@ namespace buggybuddy.Repositories
 		        return new UserResponse
 		        {
 		            Success = false,
-		            Message = "There are currently no other users in your area."
+		            Message = "There are currently no other users in your area"
 		        };
 
 		    sQuery = @"SELECT * FROM [dbo].[Denial] WHERE
 					[User] = @UserName";
 
-		    var denials = new List<Denial>();
+		    List<Denial> denials;
 		    using (Connection)
 		    {
 		        denials = Connection.Query<Denial>(sQuery, new
@@ -222,7 +222,7 @@ namespace buggybuddy.Repositories
 		        {
 		            Model = approved.FirstOrDefault(),
 		            Success = true,
-		            Message = "Successfully found a random user."
+		            Message = "Successfully found a random user"
 		        };
 		    }
 
@@ -239,7 +239,7 @@ namespace buggybuddy.Repositories
 			return new UserResponse
 			{
 				Success = false,
-				Message = "There are currently no other users in your area."
+				Message = "There are currently no other users in your area"
 			};
 		}
 	}
