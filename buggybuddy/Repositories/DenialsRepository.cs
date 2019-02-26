@@ -7,6 +7,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace buggybuddy.Repositories
 {
+    public interface IDenialsRepository
+    {
+        void AddDenial(string user, string prospect);
+    }
     public class DenialsRepository : IDenialsRepository
     {
 		private readonly IConfiguration _configuration;

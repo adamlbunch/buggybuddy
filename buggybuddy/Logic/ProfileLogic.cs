@@ -3,7 +3,11 @@ using System.Linq;
 
 namespace buggybuddy.Logic
 {
-	public class ProfileLogic : IProfileLogic
+    public interface IProfileLogic
+    {
+        string SetPicture(string path);
+    }
+    public class ProfileLogic : IProfileLogic
 	{
 		public string SetPicture(string path)
 		{

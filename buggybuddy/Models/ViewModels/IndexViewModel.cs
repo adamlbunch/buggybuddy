@@ -10,20 +10,19 @@ namespace buggybuddy.Models.ViewModels
         [Required(ErrorMessage = "Enter your username")]
         public string LoginUserName { get; set; }
 
-		[Display(Name = "Password", Prompt = "Enter your password")]
+
 		[DataType(DataType.Password)]
-        [Required(ErrorMessage = "Please enter a password")]
+        [Required(ErrorMessage = "Enter your password")]
         public string LoginPassword { get; set; }
 
         [StringLength(25, MinimumLength = 1)]
 		[RegularExpression(@"^[a-zA-Z]+$")]
-        [Required(ErrorMessage = "Please enter your first name")]
+        [Required(ErrorMessage = "Enter your first name")]
         public string RegisterFirstName { get; set; }
 
-		[Display(Name = "Last Name", Prompt = "Enter a 1 to 25 alpha name")]
 		[StringLength(25, MinimumLength = 1)]
 		[RegularExpression(@"^[a-zA-Z]+$")]
-		[Required]
+		[Required(ErrorMessage = "Enter your last name")]
 		public string RegisterLastName { get; set; }
 
         [Required(ErrorMessage = "Select your gender")]
@@ -34,7 +33,7 @@ namespace buggybuddy.Models.ViewModels
 
 		[StringLength(16, MinimumLength = 4)]
 		[RegularExpression(@"^[a-zA-Z0-9]*$")]
-		[Required(ErrorMessage = "Enter a unique user name.")]
+		[Required(ErrorMessage = "Enter a unique user name")]
 		public string RegisterUserName { get; set; }
 
 		[StringLength(16, MinimumLength = 4)]

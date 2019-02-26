@@ -9,6 +9,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace buggybuddy.Repositories
 {
+    public interface IMatchesRepository
+    {
+        DataResponse<Match> CheckForMatch(ProfileViewModel profile);
+        void AddMatch(string user, string prospect);
+        IEnumerable<Match> GetMatches(ProfileViewModel user);
+
+    }
     public class MatchesRepository : IMatchesRepository
     {
 		private readonly IConfiguration _configuration;
