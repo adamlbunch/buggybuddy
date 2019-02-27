@@ -752,11 +752,12 @@
 #match-username {
     text-align: center;
     z-index: 1;
-    position: absolute;
-    left: 40px;
+    top: 34px;
+    position: relative;
+    left: 234px;
     margin-top: 37px;
     width: 120px;
-    color: #f00
+    color: #f00;
 }
 
 #match-pic {

@@ -220,7 +220,7 @@ namespace buggybuddy.Controllers
 				model.ProspectPicture = _profileLogic.SetPicture(randomUser.Model.DataFolder);
 				model.ProspectInfo = randomUser.Model.Info;
 				HttpContext.Session.SetString(SessionKeyLastViewedProspect, randomUser.Model.UserName);
-				return View("Search", model);
+				return View(model);
 			}
 
 			var matches = new List<ProfileViewModel>();

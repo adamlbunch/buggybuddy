@@ -16,6 +16,7 @@ namespace buggybuddy.Repositories
         IEnumerable<Match> GetMatches(ProfileViewModel user);
 
     }
+
     public class MatchesRepository : IMatchesRepository
     {
 		private readonly IConfiguration _configuration;
@@ -29,10 +30,10 @@ namespace buggybuddy.Repositories
 
 		public DataResponse<Match> CheckForMatch(ProfileViewModel profile)
 		{
-			var sQuery = @"SELECT * FROM [dbo].[Match]
+			const string sQuery = @"SELECT * FROM [dbo].[Match]
 						WHERE [User] = @Prospect and [Prospect] = @User";
 
-			var entries = new List<Match>();
+			List<Match> entries;
 			using (Connection)
 			{
 				entries = Connection.Query<Match>(sQuery, new
@@ -61,7 +62,7 @@ namespace buggybuddy.Repositories
 
 		public void AddMatch(string user, string prospect)
         {
-            const string sQuery = @"INSERT INTO [dbo].[Match]([User], [Prospect]) VALUES 
+        	const string sQuery = @"INSERT INTO [dbo].[Match]([User], [Prospect]) VALUES 
 						(@User, @Prospect)";
 
             using (Connection)
@@ -108,6 +109,7 @@ namespace buggybuddy.Repositories
 					if (userInProspect.User == userInUser.Prospect)
 					{
 						matches.Add(userInUser);
+						continue;
 					}
 				}
 			}
